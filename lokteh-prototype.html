@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6c4cff">
+<title>LOKTEH — Create & Play</title>
+<style>
+:root{--ink:#222044;--purple:#6c4cff;--pink:#ff6fae;--yellow:#ffd75e;--mint:#70e1c1;--paper:#f7f5ff;--card:#fff;--muted:#716d8b}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink)}
+header{padding:18px 16px 22px;background:linear-gradient(135deg,#6c4cff,#a45cff 60%,#ff83ba);color:#fff;border-radius:0 0 28px 28px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}.logo{font-size:27px;font-weight:950;letter-spacing:1px}.pill{background:#ffffff30;border:1px solid #ffffff66;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:700}
+h1{font-size:30px;line-height:1.12;margin:22px 0 8px;max-width:440px}header p{margin:0;line-height:1.5;max-width:520px;color:#f4efff}
+main{max-width:760px;margin:auto;padding:16px 14px 40px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 24px}
+button{font:inherit;font-weight:800;border:0;border-radius:14px;padding:13px 15px;cursor:pointer;min-height:46px}.primary{background:var(--purple);color:white;box-shadow:0 5px 0 #4c32c9}.secondary{background:#fff;color:var(--ink);border:1px solid #e4defe}.small{padding:9px 12px;min-height:38px;font-size:14px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:22px 0 12px}.section-head h2{font-size:20px;margin:0}.hint{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.game{background:white;border:1px solid #e9e4ff;border-radius:20px;overflow:hidden;box-shadow:0 5px 15px #3020600a}.art{height:112px;display:grid;place-items:center;font-size:48px;background:linear-gradient(135deg,#c4f7e8,#b4b6ff)}.game:nth-child(2n) .art{background:linear-gradient(135deg,#ffe8a0,#ffb9d9)}.gamebody{padding:12px}.game h3{font-size:16px;margin:0 0 5px}.game p{font-size:12px;line-height:1.45;color:var(--muted);margin:0 0 12px;min-height:34px}.gamefoot{display:flex;align-items:center;justify-content:space-between;gap:5px}.tag{font-size:10px;color:#5a49c7;background:#f0edff;border-radius:99px;padding:5px 7px;font-weight:800}
+.panel{background:#fff;border:1px solid #e7e1ff;border-radius:22px;padding:16px;margin-top:20px}.panel h2{margin:0 0 5px;font-size:21px}.panel>p{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 15px}
+label{display:block;font-weight:800;font-size:13px;margin:12px 0 6px}input,textarea,select{width:100%;border:1px solid #dcd5f6;border-radius:12px;padding:12px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}textarea{min-height:78px;resize:vertical}.emojis{display:flex;gap:8px;flex-wrap:wrap}.emoji{font-size:24px;background:#f5f2ff;border:2px solid transparent;border-radius:12px;padding:7px;min-height:44px}.emoji.selected{border-color:var(--purple);background:#e9e4ff}
+.notice{background:#fff7d8;border:1px solid #ffe79a;border-radius:14px;padding:12px;font-size:12px;line-height:1.55;color:#69551b;margin-top:15px}
+footer{text-align:center;font-size:12px;color:var(--muted);padding:10px 15px 26px;line-height:1.6}
+.hidden{display:none!important}.empty{padding:22px;text-align:center;color:var(--muted);background:white;border-radius:16px;grid-column:1/-1}
+#playArea{background:#e9f8ff;border-radius:18px;padding:12px;margin-top:12px}.world{height:180px;position:relative;overflow:hidden;border-radius:14px;background:linear-gradient(#9de2ff 0 68%,#85d88c 68%);display:flex;align-items:flex-end;justify-content:center;gap:8px;padding-bottom:18px}.cloud{position:absolute;top:20px;left:20%;font-size:28px}.player{font-size:35px;position:relative;z-index:2}.block{font-size:30px;position:relative;z-index:1}.playControls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+@media(min-width:600px){header{padding:24px max(24px,calc((100% - 720px)/2)) 30px}h1{font-size:38px}.art{height:145px}.game h3{font-size:18px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top"><div class="logo">🌈 LOKTEH</div><div class="pill">BETA • รุ่นทดลอง</div></div>
+  <h1>สร้างโลกของคุณ<br>แล้วชวนคนอื่นมาเล่น!</h1>
+  <p>พื้นที่ทดลองสำหรับนักสร้างเกมรุ่นใหม่ ✨ เริ่มจากไอเดียเล็ก ๆ แล้วค่อยสร้างโลกที่ยิ่งใหญ่</p>
+</header>
+<main>
+  <div class="actions">
+    <button class="primary" onclick="document.getElementById('creator').scrollIntoView({behavior:'smooth'})">＋ สร้างเกม</button>
+    <button class="secondary" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">🎮 สำรวจเกม</button>
+  </div>
+  <div class="section-head" id="games"><h2>🌟 เกมใน LOKTEH</h2><span class="hint" id="gameCount">เกมตัวอย่าง</span></div>
+  <div class="grid" id="gameGrid"></div>
+  <section class="panel" id="creator">
+    <h2>🧩 สร้างเกมของคุณ</h2>
+    <p>ตั้งชื่อ เลือกไอคอน แล้วกดเผยแพร่เพื่อเพิ่มเกมลงในรายการบนอุปกรณ์นี้</p>
+    <form id="createForm">
+      <label for="title">ชื่อเกม *</label><input id="title" maxlength="40" required placeholder="เช่น เกาะสายรุ้งของฉัน">
+      <label for="description">คำอธิบาย</label><textarea id="description" maxlength="140" placeholder="เกมนี้ให้ผู้เล่นทำอะไร?"></textarea>
+      <label>เลือกไอคอนเกม</label>
+      <div class="emojis" id="emojiPicker">
+        <button type="button" class="emoji selected" data-emoji="🏝️">🏝️</button>
+        <button type="button" class="emoji" data-emoji="🏰">🏰</button>
+        <button type="button" class="emoji" data-emoji="🚀">🚀</button>
+        <button type="button" class="emoji" data-emoji="🐉">🐉</button>
+        <button type="button" class="emoji" data-emoji="🌈">🌈</button>
+        <button type="button" class="emoji" data-emoji="🏎️">🏎️</button>
+      </div>
+      <label for="genre">ประเภทเกม</label>
+      <select id="genre"><option>ผจญภัย</option><option>สร้างเมือง</option><option>แข่งรถ</option><option>แฟนตาซี</option><option>ทดลองไอเดีย</option></select>
+      <button class="primary" style="width:100%;margin-top:16px" type="submit">🚀 เผยแพร่ใน LOKTEH รุ่นทดลอง</button>
+    </form>
+    <div class="notice">🔒 รุ่นทดลองนี้เก็บรายการเกมไว้ในเบราว์เซอร์ของอุปกรณ์นี้เท่านั้น ยังไม่ใช่การเผยแพร่ให้ทุกคนบนอินเทอร์เน็ตเห็น และการล้างข้อมูลเว็บไซต์อาจทำให้รายการหายไป</div>
+  </section>
+  <section class="panel hidden" id="playPanel">
+    <div class="section-head" style="margin-top:0"><h2 id="playTitle">กำลังเล่น</h2><button class="secondary small" onclick="closeGame()">ปิดเกม ✕</button></div>
+    <p id="playDescription"></p>
+    <div id="playArea"><div class="world"><div class="cloud">☁️</div><span class="block">🌳</span><span class="block">🧱</span><span class="player" id="player">🧑‍🚀</span><span class="block">🌼</span><span class="block">🪨</span></div>
+      <div class="playControls"><button class="secondary small" onclick="movePlayer(-1)">⬅️ ซ้าย</button><button class="secondary small" onclick="jumpPlayer()">⬆️ กระโดด</button><button class="secondary small" onclick="movePlayer(1)">ขวา ➡️</button></div>
+    </div>
+    <p class="hint">นี่คือฉากทดลองขนาดเล็ก ไม่ใช่เกมเต็มรูปแบบ</p>
+  </section>
+</main>
+<footer>LOKTEH © รุ่นต้นแบบแรก • สร้างด้วยความฝันและโทรศัพท์หนึ่งเครื่อง 💜</footer>
+<script>
+const KEY='lokteh-prototype-games-v1';
+let chosenEmoji='🏝️';
+const starter=[
+ {id:'demo1',title:'เกาะสายรุ้ง',description:'เดินสำรวจเกาะสีสันสดใสในโลกตัวอย่าง',emoji:'🏝️',genre:'ผจญภัย',starter:true},
+ {id:'demo2',title:'ปราสาทเมฆ',description:'จินตนาการถึงปราสาทบนท้องฟ้า',emoji:'🏰',genre:'แฟนตาซี',starter:true}
+];
+function loadGames(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function saveGames(g){try{localStorage.setItem(KEY,JSON.stringify(g));return true}catch(e){alert('บันทึกไม่ได้ อาจเป็นเพราะพื้นที่จัดเก็บเต็มหรือเบราว์เซอร์จำกัดข้อมูล');return false}}
+function allGames(){return [...starter,...loadGames()]}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){const games=allGames();document.getElementById('gameCount').textContent=games.length+' เกม';const grid=document.getElementById('gameGrid');grid.innerHTML='';games.forEach(g=>{const el=document.createElement('article');el.className='game';el.innerHTML=`<div class="art">${esc(g.emoji)}</div><div class="gamebody"><h3>${esc(g.title)}</h3><p>${esc(g.description||'เกมทดลองที่สร้างใน LOKTEH')}</p><div class="gamefoot"><span class="tag">${esc(g.genre||'ผจญภัย')}</span><button class="primary small" type="button">เล่น</button></div></div>`;el.querySelector('button').addEventListener('click',()=>playGame(g));grid.appendChild(el)})}
+document.getElementById('emojiPicker').addEventListener('click',e=>{const b=e.target.closest('[data-emoji]');if(!b)return;chosenEmoji=b.dataset.emoji;document.querySelectorAll('.emoji').forEach(x=>x.classList.toggle('selected',x===b))});
+document.getElementById('createForm').addEventListener('submit',e=>{e.preventDefault();const title=document.getElementById('title').value.trim();if(!title)return;const games=loadGames();games.unshift({id:'g'+Date.now(),title,description:document.getElementById('description').value.trim(),emoji:chosenEmoji,genre:document.getElementById('genre').value});if(saveGames(games)){render();e.target.reset();chosenEmoji='🏝️';document.querySelectorAll('.emoji').forEach((x,i)=>x.classList.toggle('selected',i===0));document.getElementById('gameGrid').scrollIntoView({behavior:'smooth'});alert('เพิ่มเกมในรายการ LOKTEH บนอุปกรณ์นี้แล้ว! ถ้าต้องการให้คนอื่นเห็น ต้องเผยแพร่เว็บไซต์และเพิ่มระบบเก็บข้อมูลออนไลน์ในขั้นต่อไป')}})
+function playGame(g){document.getElementById('playTitle').textContent=g.emoji+' '+g.title;document.getElementById('playDescription').textContent=g.description||'ลองสำรวจฉากตัวอย่าง';document.getElementById('playPanel').classList.remove('hidden');document.getElementById('playPanel').scrollIntoView({behavior:'smooth'});document.getElementById('player').style.transform='translateX(0)'}
+function closeGame(){document.getElementById('playPanel').classList.add('hidden')}
+let playerPos=0;function movePlayer(dir){playerPos=Math.max(-100,Math.min(100,playerPos+dir*22));document.getElementById('player').style.transform=`translateX(${playerPos}px)`}function jumpPlayer(){const p=document.getElementById('player');p.style.transform=`translate(${playerPos}px,-35px)`;setTimeout(()=>p.style.transform=`translate(${playerPos}px,0)`,250)}
+render();
+</script>
+</body>
+</html>
